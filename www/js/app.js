@@ -27,12 +27,12 @@ app.config(function(localStorageServiceProvider) {
   localStorageServiceProvider
     .setPrefix('scotch-todo');
 });
-  
+
 //controller init
 
-app.controller('main', function($scope, $ionicModal, localStorageService) {
+app.controller('main', function($scope, $log, $ionicModal, localStorageService) {
 
-  var taskData = 'task';
+  var taskData = 'task';  
 //initialize the tasks scope with empty array
   $scope.tasks = [];
 //initialize the tasks scope with empty object
@@ -46,6 +46,7 @@ app.controller('main', function($scope, $ionicModal, localStorageService) {
   });
 
   $scope.getTask = function() {
+    console.log('get inside')
     if(localStorageService.get(taskData)) {
       $scope.tasks = localStorageService.get(taskData);
     }else{
@@ -55,6 +56,7 @@ app.controller('main', function($scope, $ionicModal, localStorageService) {
 
   $scope.createTask = function () {
     //creates a new task
+    console.log('create inside')
     $scope.tasks.push($scope.task);
     localStorageService.set(taskData, $scope.tasks);
     $scope.task = {};
@@ -62,6 +64,7 @@ app.controller('main', function($scope, $ionicModal, localStorageService) {
   }
 
   $scope.removeTask = function (index) {
+    console.log('remove inside')
     //removes a task
     $scope.tasks.splice(index, 1);
     localStorageService.set(taskData, $scope.tasks)
@@ -81,6 +84,7 @@ app.controller('main', function($scope, $ionicModal, localStorageService) {
   };
 
   $scope.closeTaskModal = function () {
+    console.log('remove inside')
     $scope.newTaskModal.hide();
   };
 });
